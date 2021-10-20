@@ -1,7 +1,5 @@
 import { useState } from 'react'
 
-import { useState } from 'react'
-
 import '../styles/tasklist.scss'
 
 import { FiTrash, FiCheckSquare } from 'react-icons/fi'
@@ -24,16 +22,16 @@ export function TaskList() {
     const id : number  =  Math.floor(Math.random()*10)
     const arr : Task ={id : id, title : newTaskTitle, isComplete :false} ;
     setTasks([...tasks, arr]);
- 
+
+    
   }
 
   function handleToggleTaskCompletion(id: number) {
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
-    const markTask = tasks.map(task =>  task.id == id ? {
-      ...task,
-      isComplete : !task.isComplete
-    }
-    : task)
+    const markTask = tasks.map(task => {
+      if(task.id == id) task.isComplete = !task.isComplete
+      return task
+    })
     setTasks(markTask);
   }
 
